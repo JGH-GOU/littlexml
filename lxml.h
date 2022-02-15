@@ -143,16 +143,6 @@ XMLNode* XMLNodeList_at(XMLNodeList* list, int index)
     return list->data[index];
 }
 
-XMLNode* First_children(XMLNode* parent, const char* tag)
-{
-	for (int i = 0; i < parent->children.size; i++) {
-		XMLNode* child = parent->children.data[i];
-		if (!strcmp(child->tag, tag))
-			return child;
-	}
-	return NULL;
-}
-
 void XMLNodeList_free(XMLNodeList* list)
 {
     free(list);
@@ -185,6 +175,16 @@ void XMLNode_free(XMLNode* node)
 XMLNode* XMLNode_child(XMLNode* parent, int index)
 {
     return parent->children.data[index];
+}
+
+XMLNode* XMLNode_child_first(XMLNode* parent, const char* tag)
+{
+	for (int i = 0; i < parent->children.size; i++) {
+		XMLNode* child = parent->children.data[i];
+		if (!strcmp(child->tag, tag))
+			return child;
+	}
+	return NULL;
 }
 
 XMLNodeList* XMLNode_children(XMLNode* parent, const char* tag)
